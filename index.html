@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOMO: cozinha autoral na Vila Madalena, São Paulo</title>
+<meta name="description" content="NOMO: cozinha contemporânea autoral do chef Nando Carneiro, na Vila Madalena. Selo Bib Gourmand do Guia Michelin. Rua Harmonia, 815, Sumarezinho, São Paulo.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nomo-restaurante.vercel.app/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="restaurant.restaurant">
+<meta property="og:title" content="NOMO: tudo, menos ordinário">
+<meta property="og:description" content="Cozinha contemporânea autoral na Vila Madalena. Bib Gourmand, Guia Michelin. Rua Harmonia, 815, São Paulo.">
+<meta property="og:url" content="https://nomo-restaurante.vercel.app/">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary">
+
+<!-- Favicon: monograma N inline, sem dependência externa -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2317140F'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' fill='%23EFE7D6' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,440;0,9..144,560;1,9..144,420;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- JSON-LD: apenas dados confirmados publicamente -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "NOMO",
+  "servesCuisine": "Contemporânea",
+  "priceRange": "$$",
+  "award": "Guia Michelin, Bib Gourmand (2024)",
+  "telephone": "+55-31-99121-6648",
+  "email": "ola@nomogamia.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua Harmonia, 815",
+    "addressLocality": "São Paulo",
+    "addressRegion": "SP",
+    "postalCode": "05435-000",
+    "addressCountry": "BR"
+  },
+  "sameAs": ["https://instagram.com/nomogamia"]
+}
+</script>
+
+<style>
+  :root{
+    --carvao: #17140F;
+    --carvao-2: #1E1A13;
+    --creme: #EFE7D6;
+    --creme-dim: #C9BEA6;
+    --tinta: #211C15;
+    --brasa: #B85C2E;
+    --brasa-forte: #9B4A24;
+    --oliva: #5F6A45;
+    --oliva-clara: #838B62;
+    --linha-clara: rgba(239,231,214,0.14);
+    --linha-clara-forte: rgba(239,231,214,0.26);
+    --linha-escura: rgba(33,28,21,0.14);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --wrap: 1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--carvao);
+    color:var(--creme);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  h1,h2,h3{font-family:var(--serif); font-weight:560; margin:0; letter-spacing:-0.01em;}
+  p{margin:0;}
+  ul{margin:0; padding:0; list-style:none;}
+  button{font-family:inherit;}
+
+  .wrap{max-width:var(--wrap); margin:0 auto; padding:0 24px;}
+  @media (min-width:900px){ .wrap{padding:0 48px;} }
+
+  .skip-link{
+    position:absolute; left:-999px; top:0; background:var(--creme); color:var(--tinta);
+    padding:12px 18px; z-index:200; font-size:14px;
+  }
+  .skip-link:focus{left:16px; top:16px;}
+
+  :focus-visible{outline:2px solid var(--brasa); outline-offset:3px;}
+
+  /* ---------- Header ---------- */
+  .site-header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:20px 0;
+    transition:background-color .35s ease, padding .35s ease, border-color .35s ease;
+    border-bottom:1px solid transparent;
+  }
+  .site-header.is-scrolled{
+    background:rgba(23,20,15,0.92);
+    -webkit-backdrop-filter:blur(8px);
+    backdrop-filter:blur(8px);
+    padding:14px 0;
+    border-bottom:1px solid var(--linha-clara);
+  }
+  .site-header .wrap{display:flex; align-items:center; justify-content:space-between; gap:24px;}
+  .logotype{
+    font-family:var(--sans); font-weight:600; font-size:20px; letter-spacing:0.14em;
+    text-decoration:none; color:var(--creme);
+  }
+  .primary-nav{display:none;}
+  @media (min-width:900px){
+    .primary-nav{display:flex; gap:32px; align-items:center;}
+    .primary-nav a{
+      font-size:14.5px; text-decoration:none; color:var(--creme-dim);
+      padding:4px 0; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease;
+    }
+    .primary-nav a:hover{color:var(--creme); border-color:var(--linha-clara-forte);}
+  }
+  .header-actions{display:flex; align-items:center; gap:16px;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    font-family:var(--sans); font-size:14.5px; font-weight:500;
+    padding:12px 22px; border-radius:2px; text-decoration:none; cursor:pointer;
+    border:1px solid transparent; transition:background-color .2s ease, color .2s ease, border-color .2s ease;
+    white-space:nowrap;
+  }
+  .btn-brasa{background:var(--brasa); color:#FBF4EA;}
+  .btn-brasa:hover{background:var(--brasa-forte);}
+  .btn-linha{border-color:var(--linha-clara-forte); color:var(--creme); background:transparent;}
+  .btn-linha:hover{border-color:var(--creme); background:rgba(239,231,214,0.06);}
+  .btn-linha-escura{border-color:var(--linha-escura); color:var(--tinta); background:transparent;}
+  .btn-linha-escura:hover{border-color:var(--tinta); background:rgba(33,28,21,0.05);}
+  .header-actions .btn{display:none;}
+  @media (min-width:900px){ .header-actions .btn{display:inline-flex;} }
+
+  .menu-toggle{
+    display:flex; flex-direction:column; gap:5px; background:none; border:none; padding:8px; cursor:pointer;
+  }
+  @media (min-width:900px){ .menu-toggle{display:none;} }
+  .menu-toggle span{width:22px; height:1.5px; background:var(--creme); display:block;}
+
+  .mobile-nav{
+    position:fixed; inset:0; background:var(--carvao); z-index:150;
+    display:flex; flex-direction:column; padding:24px;
+    transform:translateY(-100%); transition:transform .35s ease;
+  }
+  .mobile-nav.is-open{transform:translateY(0);}
+  .mobile-nav-top{display:flex; justify-content:space-between; align-items:center;}
+  .mobile-nav-close{background:none; border:none; color:var(--creme); font-size:15px; padding:8px; cursor:pointer;}
+  .mobile-nav ul{margin-top:48px; display:flex; flex-direction:column; gap:6px;}
+  .mobile-nav a{
+    font-family:var(--serif); font-size:32px; text-decoration:none; color:var(--creme);
+    padding:12px 0; border-bottom:1px solid var(--linha-clara); display:block;
+  }
+  .mobile-nav .btn{margin-top:32px; align-self:flex-start;}
+
+  /* ---------- Placeholder de foto real ----------
+     Para trocar por foto real: inserir, como PRIMEIRO filho de .frame,
+     antes de .frame-note:
+       <img class="frame-img" src="..." alt="descrição real" loading="lazy">
+     e então apagar (ou manter, se quiser crédito) o bloco .frame-note.
+  ---------------------------------------------------- */
+  .frame{
+    position:relative; overflow:hidden; background:
+      radial-gradient(140% 100% at 20% 0%, rgba(184,92,46,0.20), transparent 60%),
+      radial-gradient(120% 100% at 90% 100%, rgba(95,106,69,0.24), transparent 55%),
+      var(--carvao-2);
+    border:1px solid var(--linha-clara);
+  }
+  .frame-img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .frame-note{
+    position:absolute; left:0; right:0; bottom:0; padding:18px 20px;
+    background:linear-gradient(180deg, transparent, rgba(23,20,15,0.55));
+  }
+  .frame-note p{font-size:12.5px; color:var(--creme-dim); line-height:1.5; margin:0;}
+  .frame-note strong{display:block; font-size:11px; letter-spacing:0.08em; color:var(--brasa); font-weight:600; margin-bottom:4px;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding-top:112px;}
+  .hero-grid{
+    display:grid; grid-template-columns:1fr; gap:0;
+  }
+  @media (min-width:960px){
+    .hero-grid{grid-template-columns:1.05fr 0.95fr; align-items:stretch; min-height:640px;}
+  }
+  .hero-photo{min-height:340px;}
+  @media (min-width:960px){ .hero-photo{min-height:auto;} }
+  .hero-copy{
+    display:flex; flex-direction:column; justify-content:center; gap:28px;
+    padding:48px 24px 56px;
+  }
+  @media (min-width:960px){ .hero-copy{padding:48px 56px;} }
+  .hero-award{
+    display:inline-flex; align-items:center; gap:8px; width:fit-content;
+    font-size:12.5px; color:var(--creme-dim); border:1px solid var(--linha-clara-forte);
+    padding:7px 12px 7px 10px; border-radius:2px;
+  }
+  .hero-award .dot{width:6px; height:6px; border-radius:50%; background:var(--brasa); flex:none;}
+  .hero-title{
+    font-size:clamp(40px, 6.4vw, 68px); line-height:1.02; color:var(--creme);
+  }
+  .hero-title em{font-style:italic; font-weight:420; color:var(--creme-dim);}
+  .hero-sub{
+    font-size:17px; color:var(--creme-dim); max-width:46ch; line-height:1.65;
+  }
+  .hero-facts{display:flex; flex-wrap:wrap; gap:10px 28px; font-size:14px; color:var(--creme-dim); border-top:1px solid var(--linha-clara); padding-top:20px;}
+  .hero-facts strong{color:var(--creme); font-weight:500;}
+  .hero-ctas{display:flex; flex-wrap:wrap; gap:14px;}
+
+  /* ---------- Seções genéricas ---------- */
+  section{padding:96px 0;}
+  .section-title{font-size:clamp(30px, 4vw, 44px); color:var(--creme); line-height:1.08; max-width:16ch;}
+  .on-light .section-title, .on-light h2, .on-light h3{color:var(--tinta);}
+  .lede{font-size:17px; color:var(--creme-dim); max-width:56ch; line-height:1.7;}
+  .on-light .lede{color:#524B3E;}
+
+  .on-light{background:var(--creme); color:var(--tinta);}
+  .on-light .frame{
+    border-color:var(--linha-escura);
+    background:
+      radial-gradient(140% 100% at 20% 0%, rgba(184,92,46,0.14), transparent 60%),
+      radial-gradient(120% 100% at 90% 100%, rgba(95,106,69,0.18), transparent 55%),
+      #E3D9C2;
+  }
+  .on-light .frame-note{background:linear-gradient(180deg, transparent, rgba(227,217,194,0.7));}
+  .on-light .frame-note p{color:#6B6250;}
+
+  /* ---------- Manifesto (intro) ---------- */
+  .manifesto{display:grid; grid-template-columns:1fr; gap:40px; align-items:center;}
+  @media (min-width:900px){ .manifesto{grid-template-columns:1.1fr 0.9fr; gap:64px;} }
+  .manifesto-copy{display:flex; flex-direction:column; gap:22px;}
+  .manifesto-quote{
+    font-family:var(--serif); font-style:italic; font-weight:440; font-size:clamp(22px, 2.6vw, 28px);
+    line-height:1.5; color:var(--tinta);
+  }
+  .manifesto-photo{aspect-ratio:4/5;}
+
+  /* ---------- Experiência: filmstrip ---------- */
+  .filmstrip{
+    display:flex; gap:16px; overflow-x:auto; padding-bottom:8px; margin-top:44px;
+    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+  }
+  .filmstrip::-webkit-scrollbar{height:6px;}
+  .filmstrip::-webkit-scrollbar-thumb{background:var(--linha-clara-forte);}
+  .filmstrip-item{
+    flex:0 0 78%; scroll-snap-align:start;
+  }
+  @media (min-width:640px){ .filmstrip-item{flex-basis:44%;} }
+  @media (min-width:1000px){ .filmstrip-item{flex-basis:31%;} }
+  .filmstrip-item .frame{aspect-ratio:4/5;}
+
+  /* ---------- Menu ---------- */
+  .menu-head{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:20px; margin-bottom:52px;}
+  .menu-groups{display:grid; grid-template-columns:1fr; gap:56px;}
+  @media (min-width:820px){ .menu-groups{grid-template-columns:1fr 1fr; column-gap:64px;} }
+  .menu-group-title{font-size:20px; font-family:var(--serif); font-style:italic; font-weight:500; color:var(--brasa); margin-bottom:22px;}
+  .menu-item{
+    display:flex; align-items:baseline; gap:10px;
+    padding:16px 0; border-bottom:1px solid var(--linha-clara);
+  }
+  .menu-item-name{font-size:16.5px; color:var(--creme); flex:none;}
+  .menu-item-leader{flex:1; border-bottom:1px dotted var(--linha-clara-forte); margin-bottom:5px; min-width:20px;}
+  .menu-item-price{font-size:14.5px; color:var(--creme-dim); flex:none;}
+  .menu-item-desc{display:block; font-size:13.5px; color:var(--creme-dim); margin-top:6px; line-height:1.55; max-width:52ch;}
+  .menu-note{
+    margin-top:40px; padding-top:24px; border-top:1px solid var(--linha-clara);
+    font-size:14px; color:var(--creme-dim); max-width:60ch; line-height:1.7;
+  }
+
+  /* ---------- Destaques ---------- */
+  .destaques-grid{display:grid; grid-template-columns:1fr; gap:20px;}
+  @media (min-width:800px){ .destaques-grid{grid-template-columns:1fr 1fr;} }
+  .destaque-card .frame{aspect-ratio:3/2;}
+  .destaque-title{font-size:22px; margin-top:18px; color:var(--creme);}
+  .destaque-desc{font-size:14.5px; color:var(--creme-dim); margin-top:8px; max-width:44ch; line-height:1.6;}
+
+  /* ---------- Vinhos ---------- */
+  .vinhos{display:grid; grid-template-columns:1fr; gap:40px; align-items:center;}
+  @media (min-width:900px){ .vinhos{grid-template-columns:0.9fr 1.1fr; gap:64px;} }
+  .vinhos-photo .frame{aspect-ratio:4/5;}
+  .curatorship{display:flex; align-items:center; gap:14px; margin-top:28px;}
+  .curatorship-line{width:34px; height:1px; background:var(--linha-clara-forte);}
+
+  /* ---------- Espaço ---------- */
+  .espaco-grid{display:grid; grid-template-columns:1fr; gap:20px;}
+  @media (min-width:800px){ .espaco-grid{grid-template-columns:1fr 1fr;} }
+  .espaco-main .frame{aspect-ratio:16/10;}
+  .espaco-real{grid-template-columns:1fr !important;}
+  @media (min-width:800px){ .espaco-real .frame{aspect-ratio:16/9;} }
+  .espaco-sub-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .espaco-sub-grid .frame{aspect-ratio:1/1;}
+  .espaco-copy{margin-top:36px; max-width:62ch;}
+
+  /* ---------- Pessoas ---------- */
+  .pessoas-grid{display:grid; grid-template-columns:1fr; gap:44px;}
+  @media (min-width:680px){ .pessoas-grid{grid-template-columns:1fr 1fr; gap:48px;} }
+  .pessoa .frame{aspect-ratio:4/5; margin-bottom:20px;}
+  .pessoa-nome{font-size:20px;}
+  .pessoa-papel{font-size:13px; color:var(--brasa); margin-top:4px; display:block;}
+  .pessoa-bio{font-size:14.5px; color:var(--creme-dim); margin-top:12px; line-height:1.65; max-width:48ch;}
+
+  /* ---------- Reconhecimento ---------- */
+  .reconhecimento{
+    background:var(--carvao-2);
+    border-top:1px solid var(--linha-clara); border-bottom:1px solid var(--linha-clara);
+  }
+  .reconhecimento-inner{display:grid; grid-template-columns:1fr; gap:40px;}
+  @media (min-width:900px){ .reconhecimento-inner{grid-template-columns:1.3fr 1fr; gap:64px; align-items:start;} }
+  .selo{
+    display:inline-flex; align-items:center; gap:12px; margin-bottom:26px;
+    font-size:13px; color:var(--creme-dim); letter-spacing:0.02em;
+  }
+  .selo-marca{
+    width:44px; height:44px; border:1px solid var(--linha-clara-forte); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-style:italic; font-size:15px; flex:none;
+  }
+  .reconhecimento-fact{
+    display:flex; justify-content:space-between; gap:16px; padding:18px 0; border-bottom:1px solid var(--linha-clara);
+    font-size:14.5px;
+  }
+  .reconhecimento-fact dt{color:var(--creme-dim);}
+  .reconhecimento-fact dd{margin:0; color:var(--creme); text-align:right;}
+
+  /* ---------- Reservas ---------- */
+  .reservas{
+    background:linear-gradient(160deg, var(--brasa-forte), var(--carvao) 62%);
+  }
+  .reservas-inner{display:grid; grid-template-columns:1fr; gap:36px;}
+  @media (min-width:900px){ .reservas-inner{grid-template-columns:1.2fr 1fr; align-items:end;} }
+  .reservas-title{font-size:clamp(32px, 5vw, 52px); color:#FBF4EA; max-width:14ch;}
+  .reservas-options{display:flex; flex-direction:column; gap:18px;}
+  .reservas-option{
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    padding:20px 0; border-bottom:1px solid rgba(251,244,234,0.24);
+  }
+  .reservas-option-label{font-size:13px; color:rgba(251,244,234,0.7); display:block; margin-bottom:4px;}
+  .reservas-option-value{font-size:16px; color:#FBF4EA; text-decoration:none;}
+
+  /* ---------- Localização ---------- */
+  .local{display:grid; grid-template-columns:1fr; gap:44px;}
+  @media (min-width:900px){ .local{grid-template-columns:1fr 1fr; gap:64px;} }
+  .local-map .frame{aspect-ratio:5/4;}
+  .local-fact{padding:16px 0; border-bottom:1px solid var(--linha-clara); display:flex; justify-content:space-between; gap:20px; font-size:14.5px;}
+  .local-fact dt{color:var(--creme-dim);}
+  .local-fact dd{margin:0; text-align:right;}
+  .local-disclaimer{font-size:12.5px; color:var(--creme-dim); margin-top:22px; line-height:1.6;}
+
+  /* ---------- CTA final ---------- */
+  .cta-final{text-align:center; padding:88px 0;}
+  .cta-final h2{font-size:clamp(28px, 4vw, 40px); max-width:20ch; margin:0 auto 30px;}
+  .cta-final .btn{margin:0 auto;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--carvao-2); border-top:1px solid var(--linha-clara); padding:64px 0 32px;}
+  .footer-grid{display:grid; grid-template-columns:1fr; gap:40px;}
+  @media (min-width:800px){ .footer-grid{grid-template-columns:1.2fr 0.8fr 0.8fr 1fr;} }
+  .footer-brand{font-size:20px; letter-spacing:0.14em; font-weight:600;}
+  .footer-tagline{font-size:13.5px; color:var(--creme-dim); margin-top:14px; max-width:28ch; line-height:1.6;}
+  .footer-col-title{font-size:12px; color:var(--creme-dim); margin-bottom:14px;}
+  .footer-col a, .footer-col p{font-size:14px; color:var(--creme); text-decoration:none; display:block; margin-bottom:10px; line-height:1.5;}
+  .footer-col a:hover{color:var(--brasa);}
+  .footer-bottom{
+    margin-top:56px; padding-top:24px; border-top:1px solid var(--linha-clara);
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:12.5px; color:var(--creme-dim);
+  }
+
+  /* utilidades de espaçamento */
+  .mt-56{margin-top:56px;}
+  .stack-title{display:flex; flex-direction:column; gap:20px; margin-bottom:44px;}
+
+  /* ---------- Reveal ao rolar (discreto, um único tipo de movimento) ---------- */
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.is-visible{opacity:1; transform:translateY(0);}
+  .reveal-hero{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal-hero.is-visible{opacity:1; transform:translateY(0);}
+  .reveal-hero:nth-child(1){transition-delay:.05s;}
+  .reveal-hero:nth-child(2){transition-delay:.15s;}
+  .reveal-hero:nth-child(3){transition-delay:.25s;}
+  .reveal-hero:nth-child(4){transition-delay:.35s;}
+  .reveal-hero:nth-child(5){transition-delay:.45s;}
+
+  /* ---------- Gnomo (menção discreta) ---------- */
+  .gnomo-note{
+    margin-top:28px; padding-top:24px; border-top:1px solid var(--linha-escura);
+    font-size:13.5px; color:#6B6250; max-width:48ch; line-height:1.6;
+  }
+  .gnomo-note strong{color:var(--tinta);}
+
+  /* ---------- Marca / monograma ---------- */
+  .brand-mark{
+    width:38px; height:38px; border:1px solid var(--linha-clara-forte); border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-family:var(--serif); font-style:italic; font-size:16px; color:var(--brasa); flex:none;
+  }
+  .footer-brand-row{display:flex; align-items:center; gap:14px;}
+
+  /* ---------- Barra fixa de reserva (mobile) ---------- */
+  .mobile-cta-bar{
+    position:fixed; left:16px; right:16px; bottom:16px; z-index:90;
+    opacity:0; transform:translateY(120%); transition:opacity .3s ease, transform .3s ease;
+    pointer-events:none;
+  }
+  .mobile-cta-bar.is-visible{opacity:1; transform:translateY(0); pointer-events:auto;}
+  .mobile-cta-bar .btn{width:100%; box-shadow:0 8px 24px rgba(0,0,0,0.35);}
+  @media (min-width:900px){ .mobile-cta-bar{display:none;} }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="wrap">
+    <a href="#inicio" class="logotype">NOMO</a>
+    <nav class="primary-nav" aria-label="Navegação principal">
+      <a href="#menu">Cardápio</a>
+      <a href="#experiencia">Experiência</a>
+      <a href="#vinhos">Vinhos</a>
+      <a href="#espaco">Espaço</a>
+      <a href="#reconhecimento">Reconhecimento</a>
+      <a href="#local">Local</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-linha" href="#local">Como chegar</a>
+      <a class="btn btn-brasa" href="#reservas">Reservar</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-top wrap">
+    <span class="logotype">NOMO</span>
+    <button class="mobile-nav-close" id="mobileNavClose">Fechar</button>
+  </div>
+  <ul class="wrap">
+    <li><a href="#menu">Cardápio</a></li>
+    <li><a href="#experiencia">Experiência</a></li>
+    <li><a href="#vinhos">Vinhos</a></li>
+    <li><a href="#espaco">Espaço</a></li>
+    <li><a href="#reconhecimento">Reconhecimento</a></li>
+    <li><a href="#local">Local</a></li>
+  </ul>
+  <div class="wrap"><a class="btn btn-brasa" href="#reservas">Reservar</a></div>
+</div>
+
+<main id="conteudo">
+
+  <!-- HERO -->
+  <section class="hero" id="inicio" style="padding-bottom:0;">
+    <div class="hero-grid">
+      <div class="hero-photo frame">
+        <img class="frame-img" src="images/hero.jpg" alt="Mesa do NOMO com louça de borda assinada NOMO, filé fatiado e pimentas grelhadas">
+      </div>
+      <div class="hero-copy">
+        <span class="hero-award reveal-hero"><span class="dot"></span>Guia Michelin, Bib Gourmand 2024</span>
+        <h1 class="hero-title reveal-hero">Tudo,<br><em>menos ordinário.</em></h1>
+        <p class="hero-sub reveal-hero">Cozinha autoral do chef Nando Carneiro na Vila Madalena. Fogo, sazonalidade e pratos pensados para dividir, sem hierarquia entre entrada e principal.</p>
+        <div class="hero-facts reveal-hero">
+          <span><strong>Rua Harmonia, 815</strong>, Sumarezinho, São Paulo</span>
+          <span>Terça a sábado, a partir das 19h</span>
+        </div>
+        <div class="hero-ctas reveal-hero">
+          <a href="#reservas" class="btn btn-brasa">Reservar mesa</a>
+          <a href="#menu" class="btn btn-linha">Ver cardápio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO / INTRODUÇÃO -->
+  <section class="on-light" id="manifesto">
+    <div class="wrap manifesto">
+      <div class="manifesto-copy reveal">
+        <p class="manifesto-quote">"Menu autoral, curadoria de vinhos, bolhas, e tudo menos ordinário."</p>
+        <p class="lede">É como a própria casa se descreve, e é a frase mais honesta que existe sobre o NOMO. Nando Carneiro cozinha com o que a estação oferece: vegetais em protagonismo, cortes defumados, técnica contemporânea sem cerimônia. Não existe entrada nem prato principal: existe uma sequência de pratos feitos para chegar à mesa e ser dividida.</p>
+      </div>
+      <div class="manifesto-photo frame reveal">
+        <img class="frame-img" src="images/manifesto.jpg" alt="Mãos servindo diversos pratos sobre mesa preta redonda no NOMO" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIÊNCIA GASTRONÔMICA -->
+  <section id="experiencia">
+    <div class="wrap">
+      <div class="stack-title reveal">
+        <h2 class="section-title">Da brasa até a mesa, à vista de quem senta no salão.</h2>
+        <p class="lede">A cozinha é aberta para o salão. O preparo faz parte da experiência, não só o prato pronto. Fogo, defumação e ingredientes de estação conduzem o cardápio, que muda com a safra.</p>
+      </div>
+      <div class="filmstrip">
+        <div class="filmstrip-item">
+          <div class="frame">
+            <img class="frame-img" src="images/milho.jpg" alt="Espigas de milho grelhadas e carbonizadas com queijo e ervas" loading="lazy">
+            <div class="frame-note"><p>Milho na brasa</p></div>
+          </div>
+        </div>
+        <div class="filmstrip-item">
+          <div class="frame">
+            <img class="frame-img" src="images/couve.jpg" alt="Repolho na brasa sobre muhammara, finalizado com queijo ralado e sumac" loading="lazy">
+            <div class="frame-note"><p>Repolho na brasa, muhammara</p></div>
+          </div>
+        </div>
+        <div class="filmstrip-item">
+          <div class="frame">
+            <img class="frame-img" src="images/curry.jpg" alt="Curry verde com arroz, cebolinhas grelhadas e folhas frescas" loading="lazy">
+            <div class="frame-note"><p>Curry verde</p></div>
+          </div>
+        </div>
+        <div class="filmstrip-item">
+          <div class="frame">
+            <img class="frame-img" src="images/polvo.jpg" alt="Polvo grelhado com amêijoas e molho, em caçarola de ferro" loading="lazy">
+            <div class="frame-note"><p>Polvo com amêijoas</p></div>
+          </div>
+        </div>
+        <div class="filmstrip-item">
+          <div class="frame">
+            <img class="frame-img" src="images/sourdough.jpg" alt="Fatia de pão sourdough tostado, parte do couvert" loading="lazy">
+            <div class="frame-note"><p>Sourdough do couvert</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="on-light" id="menu">
+    <div class="wrap">
+      <div class="menu-head">
+        <div>
+          <h2 class="section-title">Cardápio</h2>
+          <p class="lede" style="margin-top:14px;">Sazonal e sem divisão entre entrada e principal: os pratos abaixo são exemplos documentados da casa. Preços e composição mudam com a estação; confirme o cardápio vigente antes da visita.</p>
+        </div>
+        <a href="https://instagram.com/nomogamia" class="btn btn-linha-escura" target="_blank" rel="noopener">Cardápio completo no Instagram</a>
+      </div>
+
+      <div class="menu-groups">
+        <div>
+          <h3 class="menu-group-title">Para começar</h3>
+          <div class="menu-item">
+            <span class="menu-item-name">Couvert da casa</span>
+            <span class="menu-item-leader"></span>
+            <span class="menu-item-price">R$ 25</span>
+          </div>
+          <span class="menu-item-desc">Pão de queijo, sourdough com manteiga noisette, manjubinhas marinadas, azeite de salsão e alga kombu.</span>
+
+          <div class="menu-item" style="margin-top:22px;">
+            <span class="menu-item-name">Repolho e alface-romana na brasa</span>
+            <span class="menu-item-leader"></span>
+            <span class="menu-item-price">a confirmar</span>
+          </div>
+          <span class="menu-item-desc">Muhammara, dukkah e pistache, contraste doce sobre o vegetal tostado.</span>
+        </div>
+
+        <div>
+          <h3 class="menu-group-title">Da brasa</h3>
+          <div class="menu-item">
+            <span class="menu-item-name">Cupim defumado</span>
+            <span class="menu-item-leader"></span>
+            <span class="menu-item-price">a confirmar</span>
+          </div>
+          <span class="menu-item-desc">Mousseline de batata, amêndoas tostadas e alho frito.</span>
+
+          <div class="menu-item" style="margin-top:22px;">
+            <span class="menu-item-name">Espetinho de camarão, pimenta verde</span>
+            <span class="menu-item-leader"></span>
+            <span class="menu-item-price">a confirmar</span>
+          </div>
+          <span class="menu-item-desc">Camarão e caranguejo, mandioca e bottarga.</span>
+        </div>
+      </div>
+
+      <p class="menu-note">Pratos e valores listados a partir de fontes públicas (Guia Michelin e imprensa gastronômica). Item com espaço reservado para "confirmar" aguarda o dado real da casa. Nada aqui foi inventado.</p>
+    </div>
+  </section>
+
+  <!-- DESTAQUES -->
+  <section id="destaques">
+    <div class="wrap">
+      <div class="stack-title reveal">
+        <h2 class="section-title">Poucos pratos, ditos com convicção.</h2>
+      </div>
+      <div class="destaques-grid">
+        <div class="destaque-card">
+          <div class="frame">
+            <img class="frame-img" src="images/cupim.jpg" alt="Cupim defumado com jus, mousseline de batata, alho frito e amêndoas" loading="lazy">
+          </div>
+          <h3 class="destaque-title">Cupim defumado</h3>
+          <p class="destaque-desc">Jus, mousseline de batata, alho frito e amêndoas. Um corte que raramente é protagonista, e aqui é o centro do prato.</p>
+        </div>
+        <div class="destaque-card">
+          <div class="frame">
+            <img class="frame-img" src="images/file.jpg" alt="Filé grelhado fatiado com manteiga composta e batatas fritas artesanais" loading="lazy">
+          </div>
+          <h3 class="destaque-title">Filé na brasa</h3>
+          <p class="destaque-desc">Ponto marcado no fogo aberto, manteiga composta derretendo por cima, batata frita na hora.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VINHOS -->
+  <section class="on-light" id="vinhos">
+    <div class="wrap vinhos">
+      <div class="vinhos-photo frame">
+        <img class="frame-img" src="images/mesa-vinho.jpg" loading="lazy" alt="Mesa com taça de vinho, mãos brindando e pratos variados do NOMO">
+      </div>
+      <div>
+        <h2 class="section-title">Vinhos</h2>
+        <p class="lede" style="margin-top:18px;">A carta é pequena e pensada para o formato de pratos para compartilhar: rótulos escolhidos para acompanhar tanto o vegetal tostado quanto os cortes defumados.</p>
+        <div class="curatorship">
+          <span class="curatorship-line"></span>
+          <span style="font-size:14px; color:#6B6250;">Curadoria de Patrícia Werneck, sommelier e responsável de sala</span>
+        </div>
+        <div class="gnomo-note">
+          <p>A mesma curadoria segue na calçada: o <strong>Gnomo</strong>, wine bar informal também assinado por Patrícia Werneck, fica logo em frente ao NOMO, na Rua Rodésia, 206, o lado descontraído da casa, taça na mão.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPAÇO -->
+  <section id="espaco">
+    <div class="wrap">
+      <div class="stack-title reveal">
+        <h2 class="section-title">O espaço</h2>
+      </div>
+      <div class="espaco-grid espaco-real">
+        <div class="espaco-main">
+          <div class="frame">
+            <img class="frame-img" src="images/espaco.jpg" alt="Fachada do NOMO: entrada de madeira com plantas, salão envidraçado e cozinha aberta ao fundo" loading="lazy">
+          </div>
+        </div>
+      </div>
+      <p class="lede espaco-copy">Fachada natural, coberta de plantas. Salão envidraçado, decoração simples em tons neutros. A cozinha aberta mantém o ritmo do preparo à vista de quem está sentado, parte do que torna o jantar no NOMO uma experiência de proximidade, não de distância.</p>
+    </div>
+  </section>
+
+  <!-- PESSOAS -->
+  <section class="on-light" id="pessoas">
+    <div class="wrap">
+      <div class="stack-title reveal">
+        <h2 class="section-title">Quem conduz a casa</h2>
+      </div>
+      <div class="pessoas-grid">
+        <div class="pessoa">
+          <div class="frame" role="img" aria-label="Retrato do chef Nando Carneiro, foto real a adicionar">
+            <div class="frame-note"><strong>Foto real: a adicionar</strong><p>Retrato do chef</p></div>
+          </div>
+          <h3 class="pessoa-nome">Nando Carneiro</h3>
+          <span class="pessoa-papel">Chef</span>
+          <p class="pessoa-bio">Assina o cardápio autoral do NOMO: cozinha de estação com vegetais em destaque e técnica de fogo aplicada a cortes que raramente têm protagonismo.</p>
+        </div>
+        <div class="pessoa">
+          <div class="frame" role="img" aria-label="Retrato de Patrícia Werneck, foto real a adicionar">
+            <div class="frame-note"><strong>Foto real: a adicionar</strong><p>Retrato da sommelier</p></div>
+          </div>
+          <h3 class="pessoa-nome">Patrícia Werneck</h3>
+          <span class="pessoa-papel">Sommelier e sala</span>
+          <p class="pessoa-bio">Responsável pela sala e pela seleção de vinhos, cafés e bolhas: a curadoria que acompanha cada etapa do menu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECONHECIMENTO -->
+  <section class="reconhecimento" id="reconhecimento">
+    <div class="wrap reconhecimento-inner">
+      <div class="reveal">
+        <div class="selo">
+          <span class="selo-marca">M</span>
+          <span>Guia Michelin</span>
+        </div>
+        <h2 class="section-title">Reconhecido pelo Bib Gourmand, o selo do Guia Michelin para quem cozinha bem sem pesar no bolso.</h2>
+        <p class="lede mt-56">O NOMO recebeu o Bib Gourmand em 2024, categoria que reconhece qualidade consistente a preço justo. É o principal reconhecimento público confirmado da casa até aqui. Espaço reservado para prêmios, matérias de imprensa e depoimentos futuros, à medida que forem confirmados.</p>
+      </div>
+      <dl>
+        <div class="reconhecimento-fact">
+          <dt>Guia Michelin</dt>
+          <dd>Bib Gourmand, 2024</dd>
+        </div>
+        <div class="reconhecimento-fact">
+          <dt>Restaurant Guru</dt>
+          <dd>4,9 / 5 (220 avaliações)</dd>
+        </div>
+        <div class="reconhecimento-fact">
+          <dt>Faixa de preço</dt>
+          <dd>R$200+ por pessoa</dd>
+        </div>
+        <div class="reconhecimento-fact">
+          <dt>Cozinha</dt>
+          <dd>Contemporânea autoral</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- RESERVAS -->
+  <section class="reservas" id="reservas">
+    <div class="wrap reservas-inner">
+      <h2 class="reservas-title reveal">A mesa mais disputada de sexta é a de sábado.</h2>
+      <div class="reservas-options">
+        <div class="reservas-option">
+          <div>
+            <span class="reservas-option-label">WhatsApp</span>
+            <a class="reservas-option-value" href="https://wa.me/5531991216648?text=Ol%C3%A1!%20Gostaria%20de%20reservar%20uma%20mesa%20no%20NOMO." target="_blank" rel="noopener">(31) 99121-6648</a>
+          </div>
+        </div>
+        <div class="reservas-option">
+          <div>
+            <span class="reservas-option-label">Instagram</span>
+            <a class="reservas-option-value" href="https://instagram.com/nomogamia" target="_blank" rel="noopener">@nomogamia</a>
+          </div>
+        </div>
+        <div class="reservas-option">
+          <div>
+            <span class="reservas-option-label">E-mail</span>
+            <a class="reservas-option-value" href="mailto:ola@nomogamia.com">ola@nomogamia.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCALIZAÇÃO -->
+  <section class="on-light" id="local">
+    <div class="wrap local">
+      <div class="local-map">
+        <div class="frame" role="img" aria-label="Mapa esquemático da localização, abrir no Google Maps pelo botão abaixo">
+          <div class="frame-note"><strong>Mapa</strong><p>Prévia estática. O botão abaixo abre a localização real no Google Maps</p></div>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Rua+Harmonia+815+Sumarezinho+S%C3%A3o+Paulo" class="btn btn-brasa mt-56" target="_blank" rel="noopener">Abrir no Google Maps</a>
+      </div>
+      <div>
+        <h2 class="section-title">Local e horário</h2>
+        <dl class="mt-56">
+          <div class="local-fact"><dt>Endereço</dt><dd>Rua Harmonia, 815, Sumarezinho, São Paulo, SP, 05435-000</dd></div>
+          <div class="local-fact"><dt>Terça a sexta</dt><dd>19h às 23h</dd></div>
+          <div class="local-fact"><dt>Sábado</dt><dd>12h30 às 16h · 19h às 22h30</dd></div>
+          <div class="local-fact"><dt>Domingo e segunda</dt><dd>Fechado</dd></div>
+          <div class="local-fact"><dt>Telefone</dt><dd><a href="tel:+5531991216648">(31) 99121-6648</a></dd></div>
+        </dl>
+        <p class="local-disclaimer">Horários reunidos a partir de fontes públicas. Pequenas divergências entre fontes existem. Recomendamos confirmar direto no Instagram antes da visita, e substituir por horário oficial assim que confirmado.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <div class="wrap">
+      <h2>Cozinha de estação, mesa para dividir. Reserve a sua.</h2>
+      <a href="#reservas" class="btn btn-brasa">Reservar mesa</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <div class="footer-brand-row">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span class="footer-brand">NOMO</span>
+      </div>
+      <p class="footer-tagline">Cozinha contemporânea autoral na Vila Madalena, São Paulo. Bib Gourmand, Guia Michelin.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Navegação</p>
+      <a href="#menu">Cardápio</a>
+      <a href="#vinhos">Vinhos</a>
+      <a href="#espaco">Espaço</a>
+      <a href="#reconhecimento">Reconhecimento</a>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Visite</p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Rua+Harmonia+815+Sumarezinho+S%C3%A3o+Paulo" target="_blank" rel="noopener">Rua Harmonia, 815</a>
+      <p style="color:var(--creme-dim);">Ter a Sex, 19h às 23h · Sáb 12h30 às 16h, 19h às 22h30</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Contato</p>
+      <a href="https://wa.me/5531991216648" target="_blank" rel="noopener">(31) 99121-6648</a>
+      <a href="mailto:ola@nomogamia.com">ola@nomogamia.com</a>
+      <a href="https://instagram.com/nomogamia" target="_blank" rel="noopener">@nomogamia</a>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span id="year">© NOMO</span>
+    <span>Site independente, produzido a partir de dados públicos. Não é o canal oficial da casa.</span>
+  </div>
+</footer>
+
+<div class="mobile-cta-bar" id="mobileCtaBar">
+  <a href="https://wa.me/5531991216648?text=Ol%C3%A1!%20Gostaria%20de%20reservar%20uma%20mesa%20no%20NOMO." target="_blank" rel="noopener" class="btn btn-brasa">Reservar pelo WhatsApp</a>
+</div>
+
+<script>
+  // Header muda de aparência ao rolar
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => {
+    if (window.scrollY > 24) header.classList.add('is-scrolled');
+    else header.classList.remove('is-scrolled');
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Menu mobile
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('mobileNav');
+  const closeBtn = document.getElementById('mobileNavClose');
+  function openNav(){
+    nav.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeNav(){
+    nav.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  toggle.addEventListener('click', openNav);
+  closeBtn.addEventListener('click', closeNav);
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+
+  document.getElementById('year').textContent = '© ' + new Date().getFullYear() + ' NOMO';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Entrada única do hero, ao carregar a página (não depende de scroll)
+  const heroEls = document.querySelectorAll('.reveal-hero');
+  if (reduceMotion) {
+    heroEls.forEach(el => el.classList.add('is-visible'));
+  } else {
+    requestAnimationFrame(() => {
+      setTimeout(() => heroEls.forEach(el => el.classList.add('is-visible')), 60);
+    });
+  }
+
+  // Reveal discreto ao rolar, um único tipo de movimento, sem repetição por card
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  // Barra fixa de reserva no mobile, some no hero, aparece depois
+  const ctaBar = document.getElementById('mobileCtaBar');
+  const heroSection = document.getElementById('inicio');
+  if (ctaBar && heroSection) {
+    const ctaObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        ctaBar.classList.toggle('is-visible', !entry.isIntersecting);
+      });
+    }, { threshold: 0 });
+    ctaObserver.observe(heroSection);
+  }
+</script>
+</body>
+</html>
